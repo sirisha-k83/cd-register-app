@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mavenapp-deployment
+  labels:
+    app: mavenapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mavenapp
+  template:
+    metadata:
+      labels:
+        app: mavenapp
+    spec:
+      containers:
+        - name: mavenapp
+          image: rcr1983.azurecr.io/mavenapp:v1  # Jenkins will update this tag
+          resources:
+          limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
+
+
